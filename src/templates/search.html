@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+    integrity="sha-384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+    crossorigin="anonymous"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            
+    <title>PhoneBook</title>
+</head>
+<body id="home" class="scrollspy">
+    <div class="navbar-fixed">
+        <nav class="teal">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="http://127.0.0.1:8000/" class="brand-logo">PhoneBook</a>
+                    <a href="" data-target="mobile-nav" class="sidenav-trigger">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a href="http://127.0.0.1:8000/">Create Contact</a>
+                        </li>
+                        <li>
+                            <a href="#popular">Search</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <ul class="sidenav" id="mobile-nav">
+        <li>
+            <a href="http://127.0.0.1:8000/">Create Contact</a>
+        </li>
+        <li>
+            <a href="/search">Search</a>
+        </li>
+    </ul>
+        
+
+    <section id="contact" class="section section-contact scrollspy">
+        <div class="container">
+            <div class="row">
+
+                <!-- Search -->
+                <div class="col s12 m6">
+                    <div class="card-panel grey lighten-3">
+                        <h5>SEARCH CONTACT</h5>
+                        <form method="get">
+                            {{ filter.form.as_p }}
+                            <button class="btn waves-effect waves-light" type="submit" name="action">SEARCH
+                                <i class="material-icons right">search</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col s12 m10">
+                        <div class="card-panel grey lighten-3">
+                <table class="table table-bordered">
+                    <caption>SEARCH RESULTS</caption>
+                    <thead>
+                        <tr>
+                        <th>FIRST NAME</th>
+                        <th>LAST NAME</th>
+                        <th>EMAIL</th>
+                        <th>WORKPLACE</th>
+                        <th>PHONE</th>
+                        <th>AGE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in filter.qs %}
+                        <tr>
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.lastname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.workplace }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>{{ user.age}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                    </div>
+                    </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Section: Follow -->
+    <section class="section section-follow teal darken-2 white-text">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h4>Follow PhoneBook</h4>
+                    <p>Follow us on social media for special offers.</p>
+                    <a href="#" class="white-text">
+                        <i class="fab fa-facebook fa-4x"></i>
+                    </a>
+                    <a href="#" class="white-text">
+                        <i class="fab fa-twitter fa-4x"></i>
+                    </a>
+                    <a href="#" class="white-text">
+                        <i class="fab fa-instagram fa-4x"></i>
+                    </a>
+                    <a href="#" class="white-text">
+                        <i class="fab fa-linkedin fa-4x"></i>
+                    </a>
+                    <a href="#" class="white-text">
+                        <i class="fab fa-google-plus fa-4x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // SideNav
+        const sidenav = document.querySelector('.sidenav');
+        M.Sidenav.init(sidenav,{});
+        
+        // Slider
+        const slider = document.querySelector('.slider');
+        console.log(slider);
+        M.Slider.init(slider,{
+            indicators: false,
+            height: 500,
+            transition: 500,
+            interval: 3000
+        });
+
+        // Autocomplete 
+        const ac = document.querySelector('.autocomplete');
+        M.Autocomplete.init(ac,{
+            data: {}
+        })
+
+        // MaterialBoxed
+        const mb = document.querySelectorAll('.materialboxed')
+        M.Materialbox.init(mb,{})
+
+        //ScrollSpy
+        const ss = document.querySelectorAll('.scrollspy');
+        M.ScrollSpy.init(ss,{})
+    </script>
+
+    </body>
+</html>
